@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './../services/api.service';
+import { AuthService } from './../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  isLogin = false;
+
+  constructor(
+    private api: ApiService,
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  isUserLogin(): void{
+    console.log(this.auth.getUserDetails());
+    if (this.auth.getUserDetails() != null){
+      this.isLogin = true;
+    }
   }
 
 }
