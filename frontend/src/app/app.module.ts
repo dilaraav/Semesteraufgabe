@@ -16,6 +16,7 @@ import { MeineerfolgeComponent } from './meineerfolge/meineerfolge.component';
 import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { FaqComponent } from './faq/faq.component';
+import { ErnaehrungsplanComponent } from './ernaehrungsplan/ernaehrungsplan.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FaqComponent } from './faq/faq.component';
     MeineerfolgeComponent,
     DatenschutzComponent,
     KontaktComponent,
-    FaqComponent
+    FaqComponent,
+    ErnaehrungsplanComponent
   ],
   imports: [
     BrowserModule,

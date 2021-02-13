@@ -11,6 +11,7 @@ import {MeineerfolgeComponent} from "./meineerfolge/meineerfolge.component";
 import {DatenschutzComponent} from './datenschutz/datenschutz.component';
 import {KontaktComponent} from './kontakt/kontakt.component';
 import {FaqComponent} from './faq/faq.component';
+import { ErnaehrungsplanComponent } from './ernaehrungsplan/ernaehrungsplan.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'datenschutz', component:DatenschutzComponent},
   {path: 'kontakt', component:KontaktComponent},
   {path: 'faq', component:FaqComponent},
+  {path: 'ernaehrungsplan', component:ErnaehrungsplanComponent},
 
 
 
