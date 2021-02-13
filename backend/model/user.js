@@ -6,7 +6,7 @@ const mysql = require('mysql');
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "nevsehiR50",
+    password: "Cokgizli12068",
     database: "login"
 });
 router.post('/register', async function (req, res, next) {
