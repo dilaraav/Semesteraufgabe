@@ -21,7 +21,6 @@ export class CreateComponent implements OnInit {
   ) {
     this.form = this.fb.group(
       {
-        idControl: ['', Validators.required],
         datumControl: ['', Validators.required],
         gewichtControl: ['', Validators.required],
         armControl: ['', Validators.required],
@@ -43,7 +42,7 @@ export class CreateComponent implements OnInit {
     this.data.datum = values.datumControl;
     this.data.gewicht = values.gewichtControl;
     this.data.arm = values.armControl;
-    this.data.brust = values.brustlControl;
+    this.data.brust = values.brustControl;
     this.data.taille = values.tailleControl;
     this.data.huefte = values.huefteControl;
     this.data.oberschenkel = values.oberschenkelControl;
