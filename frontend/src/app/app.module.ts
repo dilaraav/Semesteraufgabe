@@ -25,6 +25,7 @@ import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { pencilSquare } from 'ngx-bootstrap-icons';
 import { trash } from 'ngx-bootstrap-icons';
 import { FormComponent } from './erfolge/read/form/form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const icons = {
   pencilSquare,
@@ -57,7 +58,8 @@ const icons = {
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxBootstrapIconsModule.forRoot(icons)
+    NgxBootstrapIconsModule.forRoot(icons),
+    NgbModule
 
   ],
   providers: [],

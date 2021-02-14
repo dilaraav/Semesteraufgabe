@@ -11,6 +11,8 @@
       <th>Taillenumfang</th>
       <th>Hüftumfang</th>
       <th>Oberschenkel</th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +32,13 @@
         width="1em"
         height="1em">
       </i-bs></a></td>
+    <td><i-bs
+      name="trash"
+      class="text-secondary"
+      width="1em"
+      height="1em"
+      (click)="open(content, erfolg.id)">
+    </i-bs></td>
   </tr>
   </tbody>
 
@@ -53,3 +62,79 @@
   </div>
   <p><a [routerLink]="['/read']">Zurück zur Tabelle</a></p>
 </div>
+<div *ngIf="erfolg">
+  <app-form [data]="erfolg" (updateEvent)="update($event)"></app-form>
+</div>
+
+<!-- modaler Dialog fuer das Loeschen -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4 style="color: red">Do you really want to delete this data set?</h4>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="inpId">id</label>
+        <div class="input-group">
+          <input id="inpId" class="form-control" formControlName="idControl" value="{{ erfolg?.id }}" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inpDatum">Datum</label>
+        <div class="input-group">
+          <input id="inpDatum" class="form-control" formControlName="datumNameControl" value="{{ erfolg?.datum }}" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inpGewicht">Gewicht</label>
+        <div class="input-group">
+          <input id="inpGewicht" class="form-control" formControlName="gewichtControl" value="{{ erfolg?.gewicht }}" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label for="inpArm">Armumfang</label>
+        <div class="input-group">
+          <input id="inpArm" class="form-control" formControlName="armControl" value="{{ erfolg?.arm }}" readonly>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inpBrust">Brustumfang</label>
+        <div class="input-group">
+          <input id="inpBrust" class="form-control" formControlName="brustControl" value="{{ erfolg?.brust }}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inpTaille">Taillenumfang</label>
+        <div class="input-group">
+          <input id="inpTaille" class="form-control" formControlName="tailleControl" value="{{ erfolg?.taille }}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inpHuefte">Hüftumfang</label>
+        <div class="input-group">
+          <input id="inpHuefte" class="form-control" formControlName="huefteControl" value="{{ erfolg?.huefte }}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inpOber">Oberschenkel</label>
+        <div class="input-group">
+          <input id="inpOber" class="form-control" formControlName="oberschenkelControl" value="{{ erfolg?.oberschenkel }}" readonly>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="modal.close('delete')">Delete</button>
+  </div>
+</ng-template>

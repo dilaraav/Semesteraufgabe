@@ -1,4 +1,4 @@
-import {Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Data } from '../../../services/data';
 import { Location } from '@angular/common';
@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 })
 export class FormComponent implements OnInit {
   @Input() data: Data;
+  @Output() updateEvent = new EventEmitter<Data>();
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private location: Location) {
@@ -46,6 +47,16 @@ export class FormComponent implements OnInit {
   }
 
   cancel(): void {
+    const values = this.form.value;
+    this.data.id = values.idControl;
+    this.data.datum = values.datumControl;
+    this.data.gewicht = values.gewichtControl;
+    this.data.arm = values.armControl;
+    this.data.brust = values.brustControl;
+    this.data.taille = values.tailleControl;
+    this.data.huefte = values.huefteControl;
+    this.data.oberschenkel = values.oberschenkelControl;
+    this.updateEvent.emit(this.data);
     this.location.back();
   }
 
