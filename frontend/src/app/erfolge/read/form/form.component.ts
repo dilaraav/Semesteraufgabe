@@ -10,8 +10,9 @@ import { Location } from '@angular/common';
 })
 export class FormComponent implements OnInit {
   @Input() data: Data;
-  @Output() updateEvent = new EventEmitter<Data>();
   form: FormGroup;
+  @Output() updateEvent = new EventEmitter<Data>();
+
 
   constructor(private fb: FormBuilder, private location: Location) {
     this.form = this.fb.group(
@@ -42,11 +43,6 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.form.value);
-  }
-
-  cancel(): void {
     const values = this.form.value;
     this.data.id = values.idControl;
     this.data.datum = values.datumControl;
@@ -57,7 +53,11 @@ export class FormComponent implements OnInit {
     this.data.huefte = values.huefteControl;
     this.data.oberschenkel = values.oberschenkelControl;
     this.updateEvent.emit(this.data);
+  }
+
+  cancel(): void {
     this.location.back();
+
   }
 
 }

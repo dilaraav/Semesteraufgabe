@@ -1,5 +1,10 @@
+
 <div *ngIf="selectedId == 0" class="container">
   <h2>Deine Erfolge im Überblick</h2>
+  <div class="button-add">
+    <button type="button" class="m-md-0 btn btn-outline-secondary" placement="bottom" ngbTooltip="Füge einen weiteren Erfolg hinzu" [routerLink]="['/create']">
+      Erfolg hinzufügen</button>
+  </div>
   <table class="table table-striped table-hover">
   <thead>
     <tr>
@@ -25,45 +30,35 @@
     <td>{{erfolg?.taille}}</td>
     <td>{{erfolg?.huefte}}</td>
     <td>{{erfolg?.oberschenkel}}</td>
-    <td><a [routerLink]="['/read', erfolg.id]">
+    <td><a [routerLink]="['/read/', erfolg.id]">
       <i-bs
         name="pencil-square"
         class="text-secondary"
         width="1em"
         height="1em">
       </i-bs></a></td>
-    <td><i-bs
+      <td><i-bs
       name="trash"
       class="text-secondary"
       width="1em"
       height="1em"
       (click)="open(content, erfolg.id)">
-    </i-bs></td>
+      </i-bs></td>
   </tr>
   </tbody>
-
   </table>
 </div>
+
 <div *ngIf="selectedId > 0" class="container">
-  <h1>{{ selectedId }}</h1>
   <div *ngIf="error">
+  <h1>{{ selectedId }}</h1>
     <p>{{ error?.message }}</p>
     <p>{{ error?.status }}</p>
+    <p><a [routerLink]="['/read']">Zurück zur Tabelle</a></p>
   </div>
   <div *ngIf="erfolg">
-    <p>{{erfolg.datum}}</p>
-    <p>{{erfolg.gewicht}}</p>
-    <p>{{erfolg.arm}}</p>
-    <p>{{erfolg.brust}}</p>
-    <p>{{erfolg.taille}}</p>
-    <p>{{erfolg.huefte}}</p>
-    <p>{{erfolg.oberschenkel}}</p>
-    <app-form [data]="erfolg"></app-form>
+    <app-form [data]="erfolg" (updateEvent)="update($event)"></app-form>
   </div>
-  <p><a [routerLink]="['/read']">Zurück zur Tabelle</a></p>
-</div>
-<div *ngIf="erfolg">
-  <app-form [data]="erfolg" (updateEvent)="update($event)"></app-form>
 </div>
 
 <!-- modaler Dialog fuer das Loeschen -->

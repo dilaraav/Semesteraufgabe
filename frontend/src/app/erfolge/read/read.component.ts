@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { Data } from '../../services/data';
 import {ActivatedRoute, Router} from '@angular/router';
-import {faUserMinus} from '@fortawesome/free-solid-svg-icons';
 import {HttpErrorResponse} from '@angular/common/http';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -22,10 +21,13 @@ export class ReadComponent implements OnInit {
   error: HttpErrorResponse;
   closeResult = '';
   form: FormGroup;
-  //faUserMinusIcon = faUserMinus;
 
-  constructor(private cs: BackendService, private route: ActivatedRoute, private router: Router,  config: NgbModalConfig,
-              private modalService: NgbModal, private fb: FormBuilder,) {
+  constructor(private cs: BackendService,
+              private route: ActivatedRoute,
+              private router: Router,
+              config: NgbModalConfig,
+              private modalService: NgbModal,
+              private fb: FormBuilder,) {
     // Konfiguration des modalen Dialogs
     config.backdrop = 'static';   // schliesst nicht, wenn man in das Fenster dahinter klickt
     config.keyboard = false;      // Modaler Dialog kann nicht durch ESC beendet werden
@@ -58,7 +60,7 @@ export class ReadComponent implements OnInit {
 
   readAll(): void {
     this.cs.getAll().subscribe(
-      (response: Data[]) => {
+      (response: Data[]) => { this.erfolge = response,
         console.log(response);
         return this.erfolge = response;  },
       error => console.log(error)

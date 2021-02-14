@@ -49,4 +49,16 @@ export class BackendService {
       );
   }
 
+  create(data: Data): void {
+    this.http.post<Data>(this.baseUrl, data)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
 }
