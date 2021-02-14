@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let erfolg of erfolge let i=index; trackBy: trackByData"; >
+  <tr *ngFor="let erfolg of erfolge let i=index; trackBy: trackByData" >
     <td> {{i+1}}</td>
     <td>{{erfolg?.datum}}</td>
     <td>{{erfolg?.gewicht}}</td>
@@ -23,7 +23,7 @@
     <td>{{erfolg?.taille}}</td>
     <td>{{erfolg?.huefte}}</td>
     <td>{{erfolg?.oberschenkel}}</td>
-    <td><a [routerLink]="['/read/', erfolg.id]">
+    <td><a [routerLink]="['/read', erfolg.id]">
       <i-bs
         name="pencil-square"
         class="text-secondary"
