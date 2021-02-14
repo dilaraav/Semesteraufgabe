@@ -12,6 +12,10 @@ import {DatenschutzComponent} from './datenschutz/datenschutz.component';
 import {KontaktComponent} from './kontakt/kontakt.component';
 import {FaqComponent} from './faq/faq.component';
 import { ErnaehrungsplanComponent } from './ernaehrungsplan/ernaehrungsplan.component';
+import { CreateComponent } from './erfolge/create/create.component';
+import { UpdateComponent } from './erfolge/update/update.component';
+import { ReadComponent } from './erfolge/read/read.component';
+import { DeleteComponent } from './erfolge/delete/delete.component';
 
 
 const routes: Routes = [
@@ -26,7 +30,13 @@ const routes: Routes = [
   {path: 'kontakt', component:KontaktComponent},
   {path: 'faq', component:FaqComponent},
   {path: 'ernaehrungsplan', component:ErnaehrungsplanComponent},
-
+  { path: 'create', component: CreateComponent },
+  { path: 'update', component: UpdateComponent },
+  { path: 'update/:id', component: UpdateComponent },
+  { path: 'read', component: ReadComponent },
+  { path: 'read/:id', component: ReadComponent },
+  { path: 'delete', component: DeleteComponent },
+  { path: 'delete/:id', component: DeleteComponent },
 
 
 

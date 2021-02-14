@@ -17,6 +17,19 @@ import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { FaqComponent } from './faq/faq.component';
 import { ErnaehrungsplanComponent } from './ernaehrungsplan/ernaehrungsplan.component';
+import { CreateComponent } from './erfolge/create/create.component';
+import { ReadComponent } from './erfolge/read/read.component';
+import { UpdateComponent } from './erfolge/update/update.component';
+import { DeleteComponent } from './erfolge/delete/delete.component';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { pencilSquare } from 'ngx-bootstrap-icons';
+import { trash } from 'ngx-bootstrap-icons';
+import { FormComponent } from './erfolge/read/form/form.component';
+
+const icons = {
+  pencilSquare,
+  trash
+};
 
 @NgModule({
   declarations: [
@@ -32,13 +45,19 @@ import { ErnaehrungsplanComponent } from './ernaehrungsplan/ernaehrungsplan.comp
     DatenschutzComponent,
     KontaktComponent,
     FaqComponent,
-    ErnaehrungsplanComponent
+    ErnaehrungsplanComponent,
+    CreateComponent,
+    ReadComponent,
+    UpdateComponent,
+    DeleteComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxBootstrapIconsModule.forRoot(icons)
 
   ],
   providers: [],

@@ -1,0 +1,55 @@
+<div *ngIf="selectedId == 0" class="container">
+  <h2>Deine Erfolge im Überblick</h2>
+  <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nr.</th>
+      <th>Datum</th>
+      <th>Gewicht</th>
+      <th>Armumfang</th>
+      <th>Brustumfang</th>
+      <th>Taillenumfang</th>
+      <th>Hüftumfang</th>
+      <th>Oberschenkel</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let erfolg of erfolge let i=index; trackBy: trackByData"; >
+    <td> {{i+1}}</td>
+    <td>{{erfolg?.datum}}</td>
+    <td>{{erfolg?.gewicht}}</td>
+    <td>{{erfolg?.arm}}</td>
+    <td>{{erfolg?.brust}}</td>
+    <td>{{erfolg?.taille}}</td>
+    <td>{{erfolg?.huefte}}</td>
+    <td>{{erfolg?.oberschenkel}}</td>
+    <td><a [routerLink]="['/read/', erfolg.id]">
+      <i-bs
+        name="pencil-square"
+        class="text-secondary"
+        width="1em"
+        height="1em">
+      </i-bs></a></td>
+  </tr>
+  </tbody>
+
+  </table>
+</div>
+<div *ngIf="selectedId > 0" class="container">
+  <h1>{{ selectedId }}</h1>
+  <div *ngIf="error">
+    <p>{{ error?.message }}</p>
+    <p>{{ error?.status }}</p>
+  </div>
+  <div *ngIf="erfolg">
+    <p>{{erfolg.datum}}</p>
+    <p>{{erfolg.gewicht}}</p>
+    <p>{{erfolg.arm}}</p>
+    <p>{{erfolg.brust}}</p>
+    <p>{{erfolg.taille}}</p>
+    <p>{{erfolg.huefte}}</p>
+    <p>{{erfolg.oberschenkel}}</p>
+    <app-form [data]="erfolg"></app-form>
+  </div>
+  <p><a [routerLink]="['/read']">Zurück zur Tabelle</a></p>
+</div>
