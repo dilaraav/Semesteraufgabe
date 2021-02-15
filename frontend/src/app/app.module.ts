@@ -12,7 +12,6 @@ import { AgbComponent } from './agb/agb.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import { MeineerfolgeComponent } from './meineerfolge/meineerfolge.component';
 import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { FaqComponent } from './faq/faq.component';
@@ -42,7 +41,6 @@ const icons = {
     FooterComponent,
     AgbComponent,
     ImpressumComponent,
-    MeineerfolgeComponent,
     DatenschutzComponent,
     KontaktComponent,
     FaqComponent,

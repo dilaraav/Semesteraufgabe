@@ -1,0 +1,12 @@
+h2{
+  text-align: inherit;
+}
+
+button {
+  color: chocolate;
+  font-weight: bolder;
+}
+
+label {
+  font-weight: bold;
+}

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../services/api.service';
 import { AuthService } from './../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +14,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private api: ApiService,
     private auth: AuthService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,5 +25,7 @@ export class DashboardComponent implements OnInit {
       this.isLogin = true;
     }
   }
+
+
 
 }

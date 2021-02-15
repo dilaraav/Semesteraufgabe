@@ -1,0 +1,12 @@
+h2, p{
+  text-align: center;
+}
+
+button {
+  color: chocolate;
+  font-weight: bolder;
+}
+
+label {
+  font-weight: bold;
+}

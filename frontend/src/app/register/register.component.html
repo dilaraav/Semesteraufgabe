@@ -1,3 +1,4 @@
+<div class = 'row m-0 w-100 d-flex flex-column sticky-footer-wrapper min-vh-100'>
 <div class = 'container'>
   <div class = 'col-md-4 offset-4 mt-5 d-flex flex-column sticky-footer-wrapper min-vh-100' *ngIf = '!this.isLogin'>
     <h4>Register</h4>
@@ -24,7 +25,9 @@
       <input class= 'btn btn-lg btn-block btn-outline-dark' type = "submit" value = "Register">
     </form>
   </div>
-  <div class = 'col-md-4 offset-4 mt-5' *ngIf = 'this.isLogin'>
-    <h5>You are logged in</h5>
+  <div class = 'col-md-6 offset-4 mt-5' *ngIf = 'this.isLogin'>
+    <h1>You are already logged in</h1>
+    <button class = 'btn btn-lg btn-block btn-outline-dark' (click) = 'logout()'>Log-out</button>
   </div>
+</div>
 </div>

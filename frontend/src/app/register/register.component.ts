@@ -57,4 +57,9 @@ export class RegisterComponent implements OnInit {
       this.isLogin = true;
     }
   }
+
+  logout(): void{
+    this.auth.clearStorage();
+    this.router.navigate(['']);
+  }
 }
