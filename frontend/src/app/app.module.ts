@@ -24,7 +24,8 @@ import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { pencilSquare } from 'ngx-bootstrap-icons';
 import { trash } from 'ngx-bootstrap-icons';
 import { FormComponent } from './erfolge/read/form/form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from './alert/alert.component';
 
 const icons = {
   pencilSquare,
@@ -49,8 +50,18 @@ const icons = {
     ReadComponent,
     UpdateComponent,
     DeleteComponent,
-    FormComponent
+    FormComponent,
+    AlertComponent
   ],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    NgbAlertConfig
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,65 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './../services/api.service';
-import { AuthService } from './../services/auth.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
-@Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
-})
+import { AccountService, AlertService } from '@app/_services';
+
+@Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
-  isLogin = false;
-  errorMessage;
-  registerForm: FormGroup;
+  form: FormGroup;
+  loading = false;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private api: ApiService,
-    private auth: AuthService,
-    private router: Router
+    private route: ActivatedRoute,
+    private router: Router,
+    private accountService: AccountService,
+    private alertService: AlertService
   ) { }
 
-  // convenience getter for easy access to form fields
-  get f(): any { return this.registerForm.controls; }
-
-  ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
-    this.isUserLogin();
   }
 
-  onSubmit(): void {
+  // convenience getter for easy access to form fields
+  get f() { return this.form.controls; }
+
+  onSubmit() {
     this.submitted = true;
-    console.log('Your form data : ', this.registerForm.value);
-    this.api.postTypeRequest('user/register', this.registerForm.value).subscribe((res: any) => {
-      if (res.status) {
-        console.log(res);
-        this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-        this.auth.setDataInLocalStorage('token', res.token);
-        this.router.navigate(['login']);
-      } else {
-        console.log(res);
-        alert(res.msg);
-      }
-    }, err => {
-      this.errorMessage = err.error.message;
-    });
-  }
 
-  isUserLogin(): void{
-    if (this.auth.getUserDetails() != null){
-      this.isLogin = true;
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
     }
-  }
 
-  logout(): void{
-    this.auth.clearStorage();
-    this.router.navigate(['']);
+    this.loading = true;
+    this.accountService.register(this.form.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+          this.router.navigate(['../login'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 }
