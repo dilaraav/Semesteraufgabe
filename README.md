@@ -1,6 +1,6 @@
 # FITALITY
 
-#FITALITY ist eine Website, welches Personen helfen kann das eigene Gewicht immer im Blick zu halten und somit Zielen näher zukommen.
+FITALITY ist eine Website, welches Personen helfen kann das eigene Gewicht immer im Blick zu halten und somit Zielen näher zu kommen.
 
 Zunächst einmal sollte man sich registrieren. Das geschieht über den Login-Button und dann Create-Account. 
 Um sich registrieren zu können benötigt man ein Benutzernamen, E-Mail und Passwort. Eine Passwort Verifizierung ist bei #FITALITY nicht notwendig. 
