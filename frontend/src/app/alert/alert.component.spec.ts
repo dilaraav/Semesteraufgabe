@@ -10,7 +10,7 @@ describe('AlertComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AlertComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

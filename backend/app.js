@@ -8,4 +8,4 @@ app.use('/', index_router);
 app.listen(4000, () => {
     console.log('listening on port 4000');
 })
-require("./routes/erfolge.routes.js")(app);
+require("./routes/erfolge.routes.js")(app)

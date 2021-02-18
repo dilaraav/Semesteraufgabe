@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AgbComponent } from './agb/agb.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { FaqComponent } from './faq/faq.component';
@@ -25,7 +25,8 @@ import { pencilSquare } from 'ngx-bootstrap-icons';
 import { trash } from 'ngx-bootstrap-icons';
 import { FormComponent } from './erfolge/read/form/form.component';
 import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AlertComponent } from './alert/alert.component';
+import { AlertComponent } from './alert';
+import {ErrorInterceptor, JwtInterceptor} from "./helpers";
 
 const icons = {
   pencilSquare,
@@ -58,7 +59,7 @@ const icons = {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-    // provider used to create fake backend
+    //provider used to create fake backend
     NgbAlertConfig
   ],
 
@@ -71,7 +72,6 @@ const icons = {
     NgbModule
 
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
