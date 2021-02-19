@@ -11,5 +11,10 @@
       <a class="p-2 text-dark float-left" [routerLink]="['/ernaehrungsplan']"><h5>Ernährungsplan</h5></a>
       </span>
     </span>
+    <span class="" *ngIf="user">
+      <button class="btn btn-outline" (click)="logout()"></button>
+      <i-bs name="boxArrowRight" style="color: chocolate" width="1.5em"
+            height="1.5em" title="logout"></i-bs>
+  </span>
   </div>
 </nav>

@@ -1,0 +1,10 @@
+{
+    "database": {
+    "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "nevsehiR50",
+        "database": "login"
+},
+    "secret": "THIS IS MY SUPER SECRET FOR KLAUSURWEBTECH USER"
+}

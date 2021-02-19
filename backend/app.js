@@ -1,11 +1,27 @@
-const express = require('express');
-const index_router = require('./controller/index');
+const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require('cors');
+var router = require('./routes/routes');
+
 const app = express();
-app.use(cors())
+global.__basedir = __dirname;
+
+// parse requests of content-type: application/json
+app.use(bodyParser.json());
+
+// enable cors for all requests
+app.use(cors());
+
+// parse requests of content-type: application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.json());
-app.use('/', index_router);
+
+// include the routers
+router(app);
+
+
+// set port, listen for requests
 app.listen(4000, () => {
-    console.log('listening on port 4000');
-})
-require("./routes/erfolge.routes.js")(app)
+    console.log("Server is running on port 4000.");
+});

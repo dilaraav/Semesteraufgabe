@@ -21,7 +21,7 @@ import { ReadComponent } from './erfolge/read/read.component';
 import { UpdateComponent } from './erfolge/update/update.component';
 import { DeleteComponent } from './erfolge/delete/delete.component';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
-import { pencilSquare } from 'ngx-bootstrap-icons';
+import { pencilSquare, infoCircleFill, person, boxArrowRight } from 'ngx-bootstrap-icons';
 import { trash } from 'ngx-bootstrap-icons';
 import { FormComponent } from './erfolge/read/form/form.component';
 import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +30,10 @@ import {ErrorInterceptor, JwtInterceptor} from "./helpers";
 
 const icons = {
   pencilSquare,
-  trash
+  trash,
+  infoCircleFill,
+  person,
+  boxArrowRight
 };
 
 @NgModule({
@@ -68,7 +71,7 @@ const icons = {
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxBootstrapIconsModule.forRoot(icons),
+    NgxBootstrapIconsModule.pick(icons),
     NgbModule
 
   ],

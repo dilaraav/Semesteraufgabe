@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const validateRequest = require('middleware/validate-request');
-const authorize = require('middleware/authorize')
+const validateRequest = require('../middleware/validate-request');
+const authorize = require('../middleware/authorize')
 const userService = require('./user.service');
 
-// routes
+//Die routes, die dann in routes.ts aufgerufen werden
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
 router.get('/', authorize(), getAll);
