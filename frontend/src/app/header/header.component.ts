@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import { ApiService } from './../services/api.service';
-import { AuthService } from './../services/auth.service';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {AccountService} from '../shared/account.service';
+import {User} from '../models';
 
 @Component({
   selector: 'app-header',
@@ -10,25 +8,19 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  user: User;
 
-  isLogin = false;
+  constructor(private accountService: AccountService) {
+    this.accountService.user.subscribe(x => this.user = x);
+  }
 
-  constructor(
-    private api: ApiService,
-    private auth: AuthService,
-    private router: Router
-  ) { }
+  logout() {
+    this.accountService.logout();
+  }
 
   ngOnInit(): void {
   }
 
-
-  isUserLogin(): void{
-    console.log(this.auth.getUserDetails());
-    if (this.auth.getUserDetails() != null){
-      this.isLogin = true;
-    }
-  }
 }
 
 

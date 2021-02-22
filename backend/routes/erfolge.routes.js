@@ -1,21 +1,12 @@
-module.exports = app => {
-    const erfolge = require("../controller/erfolge.controller.js");
+var express = require('express');
+var erfolg = require('../controller/erfolge.controller');
+var router = express.Router();
 
-    // Create a new Member
-    app.post("/erfolge", erfolge.create);
+//Alle Routes für Erfolge
+router.get('/', erfolg.getAll);
+router.get('/:id', erfolg.getById);
+router.post('/',  erfolg.create);
+router.put('/:id',  erfolg.update);
+router.delete('/:id',  erfolg.delete);
 
-    // GET all Members
-    app.get("/erfolge", erfolge.findAll);
-
-    // GET one single Member with memberId
-    app.get("/erfolge/:id", erfolge.findOne);
-
-    // Update one Member with memberId
-    app.put("/erfolge/:id", erfolge.update);
-
-    // Delete the Member with memberId
-    app.delete("/erfolge/:id", erfolge.delete);
-
-    // Delete all members
-    app.delete("/erfolge", erfolge.deleteAll);
-};
+module.exports = router;

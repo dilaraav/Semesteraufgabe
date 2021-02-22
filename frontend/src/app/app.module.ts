@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -11,7 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AgbComponent } from './agb/agb.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { FaqComponent } from './faq/faq.component';
@@ -21,14 +22,18 @@ import { ReadComponent } from './erfolge/read/read.component';
 import { UpdateComponent } from './erfolge/update/update.component';
 import { DeleteComponent } from './erfolge/delete/delete.component';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
-import { pencilSquare } from 'ngx-bootstrap-icons';
-import { trash } from 'ngx-bootstrap-icons';
+import { pencilSquare, trash, infoCircleFill, person, boxArrowRight } from 'ngx-bootstrap-icons';
 import { FormComponent } from './erfolge/read/form/form.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from './alert';
+import {ErrorInterceptor, JwtInterceptor} from "./helpers";
 
 const icons = {
   pencilSquare,
-  trash
+  trash,
+  infoCircleFill,
+  person,
+  boxArrowRight
 };
 
 @NgModule({
@@ -49,8 +54,18 @@ const icons = {
     ReadComponent,
     UpdateComponent,
     DeleteComponent,
-    FormComponent
+    FormComponent,
+    AlertComponent
   ],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    //provider used to create fake backend
+    NgbAlertConfig
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -58,9 +73,7 @@ const icons = {
     HttpClientModule,
     NgxBootstrapIconsModule.forRoot(icons),
     NgbModule
-
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

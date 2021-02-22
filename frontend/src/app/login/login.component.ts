@@ -1,62 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { ApiService } from './../services/api.service';
-import { AuthService } from './../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+
+import { AccountService } from '../shared/account.service';
+import {AlertService} from  '../shared/alert.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  isLogin = false;
-  errorMessage;
-  loginForm: FormGroup;
+  form: FormGroup;
+  loading = false;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private api: ApiService,
-    private auth: AuthService,
-    private router: Router
+    private route: ActivatedRoute,
+    private router: Router,
+    private accountService: AccountService,
+    private alertService: AlertService
   ) { }
 
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
+  ngOnInit() {
+    this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.isUserLogin();
   }
 
   // convenience getter for easy access to form fields
-  get f(): any { return this.loginForm.controls; }
+  get f() { return this.form.controls; }
 
-  onSubmit(): void {
+  onSubmit() {
     this.submitted = true;
-    console.log('Your form data : ', this.loginForm.value);
-    this.api.postTypeRequest('user/login', this.loginForm.value).subscribe((res: any) => {
-      if (res.status) {
-        console.log(res);
-        this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-        this.auth.setDataInLocalStorage('token', res.token);
-        this.router.navigate(['']);
-      } else {
-      }
-    }, err => {
-      this.errorMessage = err.error.message;
-    });
-  }
 
-  isUserLogin(): void{
-    console.log(this.auth.getUserDetails());
-    if (this.auth.getUserDetails() != null){
-      this.isLogin = true;
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
     }
-  }
 
-  logout(): void{
-    this.auth.clearStorage();
-    this.router.navigate(['']);
+    this.loading = true;
+    this.accountService.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // get return url from query parameters or default to home page
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
   }
 }

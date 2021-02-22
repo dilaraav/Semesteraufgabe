@@ -2,14 +2,19 @@
   <div class="logo"><a class="navbar-brand" [routerLink]="['/dashboard']"><h1>Fitality</h1></a></div>
   <div class="collapse navbar-collapse" id="navbarsExample04">
 
-    <span class="flexExpand">
-      <span id="log">
+    <span class="flexExpand" >
+      <span id="log" *ngIf="!user">
       <a class="p-2 text-dark float-right" [routerLink]="['/login']"><h5>Login</h5></a>
       </span>
       <span>
-      <a class="p-2 text-dark float-left" [routerLink]="['/read']"><h5>Meine Erfolge</h5></a>
-      <a class="p-2 text-dark float-left" [routerLink]="['/ernaehrungsplan']"><h5>Ernährungsplan</h5></a>
+      <a class="p-2 text-dark float-left" *ngIf="user" [routerLink]="['/read']"><h5>Meine Erfolge</h5></a>
+      <a class="p-2 text-dark float-left" *ngIf="user" [routerLink]="['/ernaehrungsplan']"><h5>Ernährungsplan</h5></a>
       </span>
     </span>
+
+    <span class="" *ngIf="user">
+      <button class="btn btn-outline" (click)="logout()"></button>
+      <i-bs name="boxArrowRight" style="color: chocolate" width="1.5em"
+            height="1.5em" title="logout"></i-bs></span>
   </div>
 </nav>
